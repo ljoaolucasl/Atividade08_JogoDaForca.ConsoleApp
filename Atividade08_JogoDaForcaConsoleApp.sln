@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atividade08_JogoDaForcaConsoleApp", "Atividade08_JogoDaForcaConsoleApp\Atividade08_JogoDaForcaConsoleApp.csproj", "{239A2A23-12D8-48FE-8459-DD272F991C9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atividade08_JogoDaForcaConsoleApp", "Atividade08_JogoDaForcaConsoleApp\Atividade08_JogoDaForcaConsoleApp.csproj", "{239A2A23-12D8-48FE-8459-DD272F991C9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D42B61E-9ADF-417A-A0B0-F017BB3AB296}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
