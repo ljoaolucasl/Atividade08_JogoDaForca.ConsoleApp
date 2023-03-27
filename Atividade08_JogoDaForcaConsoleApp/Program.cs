@@ -178,7 +178,7 @@ namespace Atividade07.ConsoleApp
                 Console.SetCursorPosition(25, 6);
                 Console.WriteLine(string.Join(" ", historicoLetrasEscolhidas));
                 Console.SetCursorPosition(25, 8);
-                Console.WriteLine($"5/{contadorErro + 1}");
+                Console.WriteLine($"{contadorErro + 1}/5");
             }
         }
 
