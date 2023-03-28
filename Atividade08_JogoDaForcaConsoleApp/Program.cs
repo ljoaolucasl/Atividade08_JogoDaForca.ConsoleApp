@@ -35,15 +35,13 @@ namespace Atividade07.ConsoleApp
 
                 while (continuaJogo)
                 {
-                    char letraEscolhida = CapturarLetraEscolhida();
+                    char letraEscolhida = ObterLetraEscolhida();
 
-                    acerto = AnalisarLetraAcertoOuErro(ref letrasPalavraSecreta, letraEscolhida);
+                    acerto = AnalisarLetraEscolhida(ref letrasPalavraSecreta, letraEscolhida);
 
                     CasoLetraAcertada(letrasPalavraSecreta, acerto, ref continuaJogo);
 
-                    MostradorDeErros(contadorErro, acerto, historicoLetrasEscolhidas, letraEscolhida);
-
-                    CasoLetraErrada(ref contadorErro, acerto, ref continuaJogo);
+                    CasoLetraErrada(ref contadorErro, acerto, ref continuaJogo, historicoLetrasEscolhidas, letraEscolhida);
                 }
 
                 jogarNovamente = JogarNovamente();
@@ -99,16 +97,14 @@ namespace Atividade07.ConsoleApp
         private static char[] GerarTracosPalavraSecreta()
         {
             char[] letrasPalavraSecreta = new char[palavraSecretaEscolhida.Length];
-            for (int i = 0; i < letrasPalavraSecreta.Length; i++)
-            {
-                letrasPalavraSecreta[i] = '_';
-            }
+
+            Array.Fill<char>(letrasPalavraSecreta, '_');
 
             Console.WriteLine(string.Join(" ", letrasPalavraSecreta));
             return letrasPalavraSecreta;
         }
 
-        private static char CapturarLetraEscolhida()
+        private static char ObterLetraEscolhida()
         {
             bool verificaLetras;
             bool verificaChar;
@@ -135,13 +131,12 @@ namespace Atividade07.ConsoleApp
             return letra;
         }
 
-        private static bool AnalisarLetraAcertoOuErro(ref char[] letrasPalavraSecreta, char letraEscolhida)
+        private static bool AnalisarLetraEscolhida(ref char[] letrasPalavraSecreta, char letraEscolhida)
         {
             bool acerto = false;
             for (int i = 0; i < palavraSecretaEscolhida.Length; i++)
             {
-                if (String.Compare(Convert.ToString(palavraSecretaEscolhida[i]), Convert.ToString(letraEscolhida),
-                    CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace) == 0)
+                if (AnalisarLetraCorreta(letraEscolhida, i))
                 {
                     letrasPalavraSecreta[i] = palavraSecretaEscolhida[i];
                     acerto = true;
@@ -149,6 +144,12 @@ namespace Atividade07.ConsoleApp
             }
 
             return acerto;
+        }
+
+        private static bool AnalisarLetraCorreta(char letraEscolhida, int i)
+        {
+            return String.Compare(Convert.ToString(palavraSecretaEscolhida[i]), Convert.ToString(letraEscolhida),
+                                CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace) == 0;
         }
 
         private static void CasoLetraAcertada(char[] letrasPalavraSecreta, bool acerto, ref bool continuaJogo)
@@ -182,8 +183,10 @@ namespace Atividade07.ConsoleApp
             }
         }
 
-        private static void CasoLetraErrada(ref int contadorErro, bool acerto, ref bool continuaJogo)
+        private static void CasoLetraErrada(ref int contadorErro, bool acerto, ref bool continuaJogo, char[] historicoLetrasEscolhidas, char letraEscolhida)
         {
+            MostradorDeErros(contadorErro, acerto, historicoLetrasEscolhidas, letraEscolhida);
+
             if (!acerto)
             {
                 contadorErro++;
